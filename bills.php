@@ -27,6 +27,13 @@
             window.location.reload(true);
         }
 
+        // function adapted from stackoverflow.com/questions/18749591/encode-html-entities-in-javascript
+        function escape(str) {
+            return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+                return '&#' + i.charCodeAt(0) + ';';
+            });
+        }
+
         function displayBills() {
             $.get('getBills.php', function(data) {
                 $("#accordion").html('');
@@ -42,8 +49,8 @@
                         else
                             button = '<button class="ui-button disabled" disabled>Confirmed</button>';
                         $('#accordion').prepend(
-                            '<h3 class="billTitle">£' + element['ammount'] + ' to ' + element['payer'] + '</h3>' +
-                            '<div class="bill">' + message +
+                            '<h3 class="billTitle">You need to pay £' + element['ammount'] + ' to ' + element['payer'] + '</h3>' +
+                            '<div class="bill">' + escape(element['description']) + '<br>' + message +
                             button +
                             '</div>');
                     }
@@ -57,8 +64,8 @@
                         else
                             button = '<button class="ui-button disabled" disabled>Confirmed</button>';
                         $('#accordion').prepend(
-                            '<h3 class="billTitle">£' + element['ammount'] + ' from ' + element['payee'] + '</h3>' +
-                            '<div class="bill">' + message +
+                            '<h3 class="billTitle">You need to receive £' + element['ammount'] + ' from ' + element['payee'] + '</h3>' +
+                            '<div class="bill">' + escape(element['description']) + '<br>' + message +
                             button +
                             '</div>');
                     }
@@ -112,6 +119,8 @@
         <form method="POST">
             <div class="label"><label>Ammount (&#163;)</label></div>
             <input type="number" name="ammount">
+            <div class="label"><label>Description</label></div>
+            <input type="text" name="description">
             <div class="label"><label>Payer's email</label></div>
             <input type="email" name="payer">
             <input class="ui-button" type="submit" value="Add new bill">

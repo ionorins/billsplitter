@@ -23,6 +23,13 @@
             async: true
         });
 
+        // function adapted from stackoverflow.com/questions/18749591/encode-html-entities-in-javascript
+        function escape(str) {
+            return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+                return '&#' + i.charCodeAt(0) + ';';
+            });
+        }
+
         function removeUser(user, group) {
             $.post('deleteUserFromGroup.php', {
                 'email': user,
@@ -89,7 +96,7 @@
                 console.log(data);
                 data.forEach(element => {
                     $('#accordion').append(
-                        '<h3>' + element['name'] + '</h3><div class="users" id="' + element['id'] + '"></div>'
+                        '<h3>' + escape(element['name']) + '</h3><div class="users" id="' + element['id'] + '"></div>'
                     );
                     $.get('getUsers.php?groupId=' + element['id'], function(data) {
                         data = JSON.parse(data);
@@ -102,7 +109,7 @@
                                 '<form id="add' + element['id'] + '" method="POST"><input name="groupId" value="' + element['id'] + '" type="hidden"><input type="email" name="email"><input class="ui-button" type="submit" value="Add user"></form>';
                         }
                         data.forEach(user => {
-                            $('#' + element['id']).append(button + user['name'] + ' (' + user['email'] + ')<br>');
+                            $('#' + element['id']).append(button + escape(element['name']) + ' (' + user['email'] + ')<br>');
                             $('#' + element['id'] + '>button').click(function(event) {
                                 event.preventDefault();
                                 removeUser(user['email'], element['id']);
@@ -132,14 +139,14 @@
                 $("#accordion").accordion({
                     heightStyle: "content"
                 });
-                $.get('getRequests.php', function (data) {
+                $.get('getRequests.php', function(data) {
                     console.log(data);
                     data = JSON.parse(data);
                     data.forEach(element => {
                         $('.requests').prepend(
-                            '<div class="request">You have been invited by ' + element['leader'] + ' to join group ' + element['name']  +
-                            '<button class="ui-button" onclick="accept(\''+ element['id'] +'\')">Accept</button>' +
-                            '<button class="ui-button" onclick="reject(\''+ element['id'] +'\')">Reject</button></div>'
+                            '<div class="request">You have been invited by ' + element['leader'] + ' to join group ' + escape(element['name']) +
+                            '<button class="ui-button" onclick="accept(\'' + element['id'] + '\')">Accept</button>' +
+                            '<button class="ui-button" onclick="reject(\'' + element['id'] + '\')">Reject</button></div>'
                         );
                     });
                 });

@@ -7,7 +7,7 @@ $stmt->bindValue(':token', $token, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 $email = $query['email'];
 
-$stmt = $db->prepare('SELECT id, payee, payer, ammount, confirmedPayee, confirmedPayer
+$stmt = $db->prepare('SELECT id, payee, payer, ammount, confirmedPayee, confirmedPayer, description
                         FROM Bills where payee=:email OR payer=:email');
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
 $query = $stmt->execute();

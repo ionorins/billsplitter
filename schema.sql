@@ -21,7 +21,8 @@ CREATE TABLE Bills (
     payer TEXT NOT NULL,
     ammount FLOAT NOT NULL,
     confirmedPayee INTEGER NOT NULL,
-    confirmedPayer INTEGER NOT NULL
+    confirmedPayer INTEGER NOT NULL,
+    description TEXT NOT NULL
 );
 
 DROP TABLE Memberships;

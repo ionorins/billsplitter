@@ -1,6 +1,7 @@
 <?php
 include 'init.php';
 $payer = $_POST['payer'];
+$description = $_POST['description'];
 $ammount = floatval($_POST['ammount']);
 $token = $_SESSION['token'];
 
@@ -18,13 +19,14 @@ if (empty($query)) {
     die();
 }
 
-$stmt = $db->prepare('INSERT INTO Bills VALUES(:id, :payee, :payer, :ammount, :confirmedPayee, :confirmedPayer);');
+$stmt = $db->prepare('INSERT INTO Bills VALUES(:id, :payee, :payer, :ammount, :confirmedPayee, :confirmedPayer, :description);');
 $stmt->bindValue(':id', create_token(), SQLITE3_TEXT);
 $stmt->bindValue(':payee', $email, SQLITE3_TEXT);
 $stmt->bindValue(':payer', $payer, SQLITE3_TEXT);
 $stmt->bindValue(':ammount', $ammount, SQLITE3_FLOAT);
 $stmt->bindValue(':confirmedPayee', 0, SQLITE3_INTEGER);
 $stmt->bindValue(':confirmedPayer', 0, SQLITE3_INTEGER);
+$stmt->bindValue(':description', $description, SQLITE3_TEXT);
 $stmt->execute();
 
 // mail ($payer, 'New bill', 'You have received a new bill from ' . $email . ' worth £' . $ammount . '.');

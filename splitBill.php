@@ -32,6 +32,7 @@
                 $('.warning').html('');
                 event.preventDefault();
                 number = $('#equally').serializeArray()[0]['value'];
+                desc = $('#equally').serializeArray()[0]['description'];
 
                 $.get('getUsers.php?groupId=' + params.get('groupId'), function(data) {
                     data = JSON.parse(data);
@@ -42,6 +43,7 @@
                         if (element['email'] != window.email)
                             $.post('addBill.php', {
                                 'ammount': ammount,
+                                'description': description,
                                 'payer': element['email']
                             });
                     });
@@ -64,6 +66,8 @@
                 <form id="equally" method="POST">
                     <div class="label"><label>Ammount (&#163;)</label></div>
                     <input type="number" name="number">
+                    <div class="label"><label>Description</label></div>
+                    <input type="text" name="description">
                     <input class="ui-button" type="submit" value="Split">
                 </form>
             </div>
