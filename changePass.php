@@ -3,7 +3,7 @@ include 'init.php';
 $token = session_id();
 $pass = $_POST['password'];
 $new_pass = $_POST['newPassword'];
-$name = $_POST['name'];
+
 $stmt = $db->prepare('SELECT salt, password FROM Users where sessionId=:token');
 $stmt->bindValue(':token', $token, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();

@@ -37,8 +37,6 @@
                     return;
                 }
                 $.post('changePass.php', $('form').serialize(), function(data) {
-                    console.log("hello");
-                    console.log(data);
                     data = JSON.parse(data);
                     if (data === "success")
                         $('.warning').html('Password successfully changed.');

@@ -17,7 +17,6 @@
         });
         $.get('getEmail.php', function(data) {
             window.email = JSON.parse(data);
-            console.log(window.email);
         });
         jQuery.ajaxSetup({
             async: true
@@ -37,8 +36,6 @@
                 $.get('getUsers.php?groupId=' + params.get('groupId'), function(data) {
                     data = JSON.parse(data);
                     ammount = number / data.length;
-                    console.log()
-                    console.log(data.length);
                     data.forEach(element => {
                         if (element['email'] != window.email)
                             $.post('addBill.php', {

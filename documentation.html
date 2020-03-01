@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Documantation</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /acceptRequest.php</code></h1>
+        <p class="lead">Accepts joining request.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>requestId</code>: id of the request <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /addBill.php</code></h1>
+        <p class="lead">Adds a bill.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>payer</code>: email of user that should pay the bill <br>
+        <code>description</code>: description of bill <br>
+        <code>ammount</code>: value of bill in pounds <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /addUserToGroup.php</code></h1>
+        <p class="lead">Sends join request to user.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>groupId</code>: group's id <br>
+        <code>email</code>: invited user's email <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /changeGroupName.php</code></h1>
+        <p class="lead">Changes the name of the group.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>groupId</code>: group's id <br>
+        <code>name</code>: new name for the group <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /changeName.php</code></h1>
+        <p class="lead">Changes the name of the group.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>name</code>: new name <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /changePass.php</code></h1>
+        <p class="lead">Changes the password.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>password</code>: old password <br>
+        <code>newPassword</code>: new password <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /confirmBill.php</code></h1>
+        <p class="lead">Confirms the payment of the bill.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>billId</code>: id of the bill <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /createUser.php</code></h1>
+        <p class="lead">Creates an account.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>email</code>: email of the new user <br>
+        <code>password</code>: password of the new user <br>
+        <code>name</code>: name of the new user <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /deleteRequest.php</code></h1>
+        <p class="lead">Deletes request to join group.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>requestId</code>: request's id <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /deleteUserFromGroup.php</code></h1>
+        <p class="lead">Removes user from group.</p>
+        <hr class="my-4">
+        <p>Parameters</p>
+        <code>groupId</code>: group's id <br>
+        <code>email</code>: removed user's email <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getBills.php</code></h1>
+        <p class="lead">Returns list of bills.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getEmail.php</code></h1>
+        <p class="lead">Returns user's email.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getGroups.php</code></h1>
+        <p class="lead">Returns the groups the user is part of.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getMoneyOwedToYou.php</code></h1>
+        <p class="lead">Returns the total ammount of money other users owe to the user.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getMoneyYouOwe.php</code></h1>
+        <p class="lead">Returns the total ammount of money the user owes to other users.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getMoneyOwedToYou.php</code></h1>
+        <p class="lead">Returns the total ammount of money other users owe to the user.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getRequests.php</code></h1>
+        <p class="lead">Returns a list of group joining requests.</p>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /getUsers.php</code></h1>
+        <p class="lead">Returns a list users that are members of the group.</p>
+        <p>Parameters</p>
+        <code>groupId</code>: group's id <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /leaveGroup.php</code></h1>
+        <p class="lead">Removes the user from the group.</p>
+        <p>Parameters</p>
+        <code>groupId</code>: group's id <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>POST /login.php</code></h1>
+        <p class="lead">Logs the user in.</p>
+        <p>Parameters</p>
+        <code>email</code>: user's email <br>
+        <code>password</code>: user's password <br>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-5"><code>GET /logout.php</code></h1>
+        <p class="lead">Logs the user out.</p>
+    </div>
+</body>
