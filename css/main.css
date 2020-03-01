@@ -1,0 +1,104 @@
+body {
+    font-family: Roboto;
+    text-align: center;
+    background-color: whitesmoke;
+    color: #0073ea;
+}
+
+.container {
+    font-size: xx-large;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    font-size: xx-large;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border: 2px solid #0073ea;
+    margin-top: 10px;
+}
+
+.ui-button {
+    font-size: xx-large;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: white;
+}
+
+.label {
+    text-align: left;
+    margin-top: 20px;
+}
+
+a {
+    color: white;
+    background-color: #0073ea;
+    text-decoration: none;
+    margin: -4px;
+    padding: 14px;
+}
+
+a:hover {
+    background-color: #0c498b;
+}
+
+.space {
+    visibility: hidden;
+}
+
+.money {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #0073ea;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    line-height: 1.5em;
+    background-color: white;
+}
+
+.bill {
+    font-size: x-large;
+}
+
+.bill>* {
+    padding: 10px;
+    margin-top: 30px;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .container {
+        width: 100%;
+        zoom: 3;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    a {
+        float: left;
+        margin: 0;
+        width: 93%;
+        border-bottom: 1px solid whitesmoke;
+    }
+    .money {
+        zoom: 60%;
+    }
+    .billTitle {
+        zoom: 60%;
+    }
+    .bill {
+        width: 200%;
+        transform: translate(-25%, 0%);
+    }
+}
