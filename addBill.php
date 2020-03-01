@@ -27,6 +27,6 @@ $stmt->bindValue(':confirmedPayee', 0, SQLITE3_INTEGER);
 $stmt->bindValue(':confirmedPayer', 0, SQLITE3_INTEGER);
 $stmt->execute();
 
-mail ($payer, 'New bill', 'You have received a new bill from ' . $email . ' worth £' . $ammount . '.');
+// mail ($payer, 'New bill', 'You have received a new bill from ' . $email . ' worth £' . $ammount . '.');
 
 echo json_encode('success');

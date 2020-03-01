@@ -6,8 +6,19 @@ $stmt->bindValue(':token', $token, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 $email = $query['email'];
 
-$stmt = $db->prepare('SELECT leader, name FROM Requests LEFT JOIN Groups where Requests.email=:email');
+$stmt = $db->prepare('SELECT Requests.id, leader, name FROM Requests LEFT JOIN Groups ON Requests.groupId = Groups.id where Requests.email=:email');
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-$query = $stmt->execute()->fetchArray();
-// print_r($query);
-echo json_encode($query);
+$query = $stmt->execute();
+$i = 0;
+
+while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+    $result[$i] = $row;
+    $i++;
+}
+
+if ($i == 0) {
+    echo '[]';
+    die();
+}
+
+echo json_encode($result);

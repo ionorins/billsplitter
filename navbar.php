@@ -1,5 +1,11 @@
 <?php
 include "init.php";
+
+if (array_key_exists('token', $_SESSION) == false) {
+        echo '<script> location.replace("index.php"); </script>';
+        die();
+}
+
 $token = $_SESSION['token'];
 $stmt = $db->prepare('SELECT email FROM Users where sessionId=:token');
 $stmt->bindValue(':token', $token, SQLITE3_TEXT);
@@ -7,7 +13,7 @@ $query = $stmt->execute()->fetchArray();
 $email = $query['email'];
 
 if ($email == null) {
-        header('Location: index.php');
+        echo '<script> location.replace("index.php"); </script>';
         die();
 }
 ?>

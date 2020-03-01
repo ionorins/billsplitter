@@ -74,8 +74,40 @@ a:hover {
 }
 
 .bill>* {
-    padding: 10px;
+    padding: 5px;
     margin-top: 30px;
+}
+
+.x {
+    border: none;
+    background: none;
+}
+
+.x:hover {
+    cursor: pointer;
+}
+
+.users {
+    text-align: left;
+    font-size: x-large;
+}
+
+.warning {
+    margin-bottom: 10px;
+}
+
+.request {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #0073ea;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    line-height: 1.5em;
+}
+
+.users {
+    line-height: 1.5em;
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -98,7 +130,6 @@ a:hover {
         zoom: 60%;
     }
     .bill {
-        width: 200%;
-        transform: translate(-25%, 0%);
+        width: 68%;
     }
 }

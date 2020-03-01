@@ -1,4 +1,5 @@
 <?php
+include 'init.php';
 $token = $_SESSION['token'];
 $request = $_POST['requestId'];
 
@@ -12,7 +13,7 @@ $stmt->bindValue(':request', $request, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 
 if ($email != $query['email'])
-    echo json_decode('You do not have acces to this resource');
+    echo json_encode('You do not have acces to this resource');
 
 $group_id = $query['groupId'];
 
@@ -21,3 +22,9 @@ $stmt->bindValue(':id', create_token(), SQLITE3_TEXT);
 $stmt->bindValue(':groupId', $group_id, SQLITE3_TEXT);
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
 $stmt->execute();
+
+$stmt = $db->prepare('DELETE FROM Requests where id=:request');
+$stmt->bindValue(':request', $request, SQLITE3_TEXT);
+$query = $stmt->execute()->fetchArray();
+
+echo json_encode('success');

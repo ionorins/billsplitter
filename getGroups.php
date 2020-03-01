@@ -1,13 +1,19 @@
 <?php
 include 'init.php';
 $token = $_SESSION['token'];
-$stmt = $db->prepare('SELECT email FROM Users where sessionId=:token');
+$stmt = $db->prepare('SELECT email FROM Users WHERE sessionId=:token');
 $stmt->bindValue(':token', $token, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 $email = $query['email'];
 
-$stmt = $db->prepare('SELECT Memberships.id, name FROM Memberships LEFT JOIN Groups where Memberships.email=:email');
+$stmt = $db->prepare('SELECT leader, Groups.id, name FROM Groups LEFT JOIN Memberships ON Groups.id = Memberships.groupId WHERE Memberships.email=:email');
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-$query = $stmt->execute()->fetchArray();
+$query = $stmt->execute();
+$i = 0;
 
-echo json_encode($query);
+while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+    $result[$i] = $row;
+    $i++;
+}
+
+echo json_encode($result);

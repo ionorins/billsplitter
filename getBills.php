@@ -18,4 +18,9 @@ while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
     $i++;
 }
 
+if ($i == 0) {
+    echo '[]';
+    die();
+}
+
 echo json_encode($result);

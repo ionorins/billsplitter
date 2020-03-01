@@ -41,13 +41,13 @@
                             button = '<button class="ui-button" onclick="confirmBill(\'' + element['id'] + '\')">Confirm payment of bill</button>';
                         else
                             button = '<button class="ui-button disabled" disabled>Confirmed</button>';
-                        $('#accordion').append(
-                            '<h3 class="billTitle">£' + element['ammount'] + ' to ' + element['payer'] + '<h3>' +
+                        $('#accordion').prepend(
+                            '<h3 class="billTitle">£' + element['ammount'] + ' to ' + element['payer'] + '</h3>' +
                             '<div class="bill">' + message +
                             button +
                             '</div>');
                     }
-                    if (element['payer'] == window.email) {
+                    if (element['payee'] == window.email) {
                         if (element['confirmedPayer'] != 0)
                             message = 'Confirmed by payer.';
                         else
@@ -56,25 +56,30 @@
                             button = '<button class="ui-button" onclick="confirmBill(\'' + element['id'] + '\')">Confirm payment of bill</button>';
                         else
                             button = '<button class="ui-button disabled" disabled>Confirmed</button>';
-                        $('#accordion').append(
-                            '<h3 class="billTitle">£' + element['ammount'] + ' from ' + element['payee'] + '<h3>' +
+                        $('#accordion').prepend(
+                            '<h3 class="billTitle">£' + element['ammount'] + ' from ' + element['payee'] + '</h3>' +
                             '<div class="bill">' + message +
                             button +
                             '</div>');
                     }
                 });
-                $("#accordion").accordion();
+                $("#accordion").accordion({
+                    heightStyle: "content",
+                });
             });
         }
         $(document).ready(function() {
             $.get('getMoneyYouOwe.php', function(data) {
                 data = JSON.parse(data);
-
                 $('#youOwe').html(data);
+                if (data == null)
+                    $('#youOwe').html(0);
             });
             $.get('getMoneyOwedToYou.php', function(data) {
                 data = JSON.parse(data);
                 $('#owedToYou').html(data);
+                if (data == null)
+                    $('#owedToYou').html(0);
             });
             displayBills();
             $('form').submit(function(event) {
@@ -99,11 +104,11 @@
     <div class="container">
         <?php include "navbar.php" ?>
         <div class="money">
-        Money you owe: &#163;<span id="youOwe"></span>
-        <br>
-        Money owed to you: &#163;<span id="owedToYou"></span></div>
-        <div id="accordion"></div>
+            Money you owe: &#163;<span id="youOwe"></span>
+            <br>
+            Money owed to you: &#163;<span id="owedToYou"></span></div>
         <div class="warning"></div>
+        <div id="accordion"></div>
         <form method="POST">
             <div class="label"><label>Ammount (&#163;)</label></div>
             <input type="number" name="ammount">

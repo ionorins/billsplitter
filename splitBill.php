@@ -11,33 +11,57 @@
 
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        jQuery.ajaxSetup({
+            async: false
+        });
+        $.get('getEmail.php', function(data) {
+            window.email = JSON.parse(data);
+            console.log(window.email);
+        });
+        jQuery.ajaxSetup({
+            async: true
+        });
+
+        $(document).ready(function() {
+            $("#accordion").accordion({
+                heightStyle: "content"
+            });
+            const params = new URLSearchParams(window.location.search);
+            $('#equally').submit(function(event) {
+                $('.warning').html('');
+                event.preventDefault();
+                number = $('#equally').serializeArray()[0]['value'];
+
+                $.get('getUsers.php?groupId=' + params.get('groupId'), function(data) {
+                    data = JSON.parse(data);
+                    ammount = number / data.length;
+                    console.log()
+                    console.log(data.length);
+                    data.forEach(element => {
+                        if (element['email'] != window.email)
+                            $.post('addBill.php', {
+                                'ammount': ammount,
+                                'payer': element['email']
+                            });
+                    });
+                });
+                $('.warning').html('Bill split.');
+                this.reset();
+            });
+        });
+    </script>
 
 </head>
 
 <body>
     <div class="container">
         <?php include "navbar.php" ?>
+        <div class="warning"></div>
         <div id="accordion">
-            <h3>Split equaly</h3>
+            <h3>Split equally</h3>
             <div>
-                <form method="POST">
-                    <div class="label"><label>Ammount (&#163;)</label></div>
-                    <input type="number" name="number">
-                    <input class="ui-button" type="submit" value="Split">
-                </form>
-            </div>
-            <h3>Split using percentages</h3>
-            <div>
-                <form method="POST">
-                    <div class="label"><label>Ammount (&#163;)</label></div>
-                    <input type="number" name="number">
-                    <input class="ui-button" type="submit" value="Split">
-                </form>
-            </div>
-            <h3>Split using flat ammounts</h3>
-            <div>
-                <form method="POST">
+                <form id="equally" method="POST">
                     <div class="label"><label>Ammount (&#163;)</label></div>
                     <input type="number" name="number">
                     <input class="ui-button" type="submit" value="Split">

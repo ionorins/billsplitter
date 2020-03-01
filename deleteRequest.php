@@ -1,4 +1,5 @@
 <?php
+include 'init.php';
 $token = $_SESSION['token'];
 $request = $_POST['requestId'];
 

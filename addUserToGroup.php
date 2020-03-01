@@ -25,7 +25,7 @@ $stmt->bindValue(':group_id', $group_id, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 
 if (empty($query)) {
-    echo json_encode('User' . h($email) . 'does not exist.');
+    echo json_encode('User ' . h($email) . ' does not exist.');
     die();
 }
 
@@ -55,6 +55,6 @@ $stmt->bindValue(':group_id', $group_id, SQLITE3_TEXT);
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
 $stmt->execute();
 
-mail($email, 'Join group request', 'You have been invited by ' . $owner . ' to join a group.');
+// mail($email, 'Join group request', 'You have been invited by ' . $owner . ' to join a group.');
 
 echo json_encode('success');
