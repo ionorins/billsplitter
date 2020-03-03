@@ -13,11 +13,11 @@
     <script src="js/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
+            // set up name change request
             $('#nameForm').submit(function(event) {
                 $('.warning').html('');
                 event.preventDefault();
                 $.post('changeName.php', $('form').serialize(), function(data) {
-
                     data = JSON.parse(data);
                     if (data === "success")
                         $('.warning').html('Name successfully changed.');
@@ -28,10 +28,12 @@
                 this.reset();
             });
 
+            // set up password change request
             $('#passForm').submit(function(event) {
                 event.preventDefault();
                 $('.warning').html('');
                 data = $('form').serializeArray();
+                // check if passwords match
                 if (data[2]['value'] != data[3]['value']) {
                     $('#repeat')[0].setCustomValidity('Passwords do not match.');
                     return;

@@ -1,7 +1,11 @@
 <?php
+// logs the user in
 include 'init.php';
+// get request parameters
 $email = $_POST['email'];
 $pass = $_POST['password'];
+
+// check if email is in database
 $stmt = $db->prepare('SELECT salt, password FROM Users where email=:email');
 $stmt->bindValue(':email', $email, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
@@ -11,6 +15,7 @@ if (empty($query)) {
     die();
 }
 
+// check if the password is correct
 $salt = $query['salt'];
 $encrypted_password = sha1($salt . '--' . $pass);
 

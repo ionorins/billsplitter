@@ -1,4 +1,5 @@
 <?php
+// changes the name of the user
 include 'init.php';
 $token = session_id();
 $name = $_POST['name'];

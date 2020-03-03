@@ -1,4 +1,5 @@
 <?php
+// returns user's email
 include 'init.php';
 $token = $_SESSION['token'];
 

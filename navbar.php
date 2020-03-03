@@ -1,6 +1,7 @@
 <?php
 include "init.php";
 
+// if user is not logged in, redirect to index
 if (array_key_exists('token', $_SESSION) == false) {
         echo '<script> location.replace("index.php"); </script>';
         die();

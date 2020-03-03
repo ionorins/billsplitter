@@ -1,4 +1,5 @@
 <?php
+// logs the user out
 include 'init.php';
 $token = $_SESSION['token'];
 $stmt = $db->prepare('UPDATE Users SET sessionId=null WHERE sessionId=:token');

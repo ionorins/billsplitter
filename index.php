@@ -13,6 +13,7 @@
     <script src="js/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
+            // makes login request go through ajax
             $('form').submit(function(event) {
                 $('.warning').html('');
                 event.preventDefault();

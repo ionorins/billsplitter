@@ -13,16 +13,20 @@
     <script src="js/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
+            // make registration request go through ajax
             $('form').submit(function(event) {
                 event.preventDefault();
                 $('.warning').html('');
                 data = $('form').serializeArray();
+                // check if passwords match
                 if (data[2]['value'] != data[3]['value']) {
                     $('#repeat')[0].setCustomValidity('Passwords do not match.');
                 } else {
+                    // send user creation request
                     $.post('createUser.php', $('form').serialize(), function(data) {
                         data = JSON.parse(data);
                         if (data === "success")
+                            // if user registration was successful, log the user in
                             $.post('login.php', $('form').serialize(), function(data) {
                                 data = JSON.parse(data);
                                 if (data === "success")

@@ -1,5 +1,7 @@
 <?php
+// confirms the payment of the bill
 include 'init.php';
+// get session id and parameters of the request
 $bill_id = $_GET['billId'];
 $token = $_SESSION['token'];
 $success = false;
@@ -9,10 +11,12 @@ $stmt->bindValue(':token', $token, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 $email = $query['email'];
 
+// fetch bill data
 $stmt = $db->prepare('SELECT payee, payer FROM Bills where id=:bill_id');
 $stmt->bindValue(':bill_id', $bill_id, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
 
+// confirm bill
 if ($email == $query['payee']) {
     $stmt = $db->prepare('UPDATE Bills SET confirmedPayee=1 WHERE id=:bill_id');
     $stmt->bindValue(':bill_id', $bill_id, SQLITE3_TEXT);
@@ -27,6 +31,7 @@ if ($email == $query['payer']) {
     $success = true;
 }
 
+// if both parties confirmed, delete the bill
 $stmt = $db->prepare('SELECT confirmedPayee, confirmedPayer FROM Bills WHERE id=:bill_id');
 $stmt->bindValue(':bill_id', $bill_id, SQLITE3_TEXT);
 $query = $stmt->execute()->fetchArray();
@@ -41,6 +46,5 @@ if ($success) {
     echo json_encode('success');
     die();
 }
-
 
 echo json_encode('You do not have access to this resource.');

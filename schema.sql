@@ -19,7 +19,7 @@ CREATE TABLE Bills (
     id TEXT PRIMARY KEY,
     payee TEXT NOT NULL,
     payer TEXT NOT NULL,
-    ammount FLOAT NOT NULL,
+    amount FLOAT NOT NULL,
     confirmedPayee INTEGER NOT NULL,
     confirmedPayer INTEGER NOT NULL,
     description TEXT NOT NULL

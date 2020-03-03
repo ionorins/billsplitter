@@ -12,6 +12,7 @@
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script>
+        // get user's email synchronously (before the page loads)
         jQuery.ajaxSetup({
             async: false
         });
@@ -26,21 +27,24 @@
             $("#accordion").accordion({
                 heightStyle: "content"
             });
+            // get header parameters
             const params = new URLSearchParams(window.location.search);
             $('#equally').submit(function(event) {
                 $('.warning').html('');
                 event.preventDefault();
+                // get bill value and description
                 number = $('#equally').serializeArray()[0]['value'];
-                desc = $('#equally').serializeArray()[0]['description'];
+                desc = $('#equally').serializeArray()[1]['value'];
 
                 $.get('getUsers.php?groupId=' + params.get('groupId'), function(data) {
                     data = JSON.parse(data);
-                    ammount = number / data.length;
+                    // split the bill between group members
+                    amount = (number / data.length).toFixed(2);
                     data.forEach(element => {
                         if (element['email'] != window.email)
                             $.post('addBill.php', {
-                                'ammount': ammount,
-                                'description': description,
+                                'amount': amount,
+                                'description': desc,
                                 'payer': element['email']
                             });
                     });
@@ -61,7 +65,7 @@
             <h3>Split equally</h3>
             <div>
                 <form id="equally" method="POST">
-                    <div class="label"><label>Ammount (&#163;)</label></div>
+                    <div class="label"><label>Amount (&#163;)</label></div>
                     <input type="number" name="number">
                     <div class="label"><label>Description</label></div>
                     <input type="text" name="description">
